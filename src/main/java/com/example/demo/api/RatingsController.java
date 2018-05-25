@@ -4,7 +4,7 @@ import com.example.demo.model.Rating;
 import com.example.demo.repository.RatingsRepository;
 import com.example.demo.repository.TalksRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -15,16 +15,19 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/ratings")
-@RequiredArgsConstructor
 public class RatingsController {
 
-    final ObjectMapper objectMapper;
+    @Autowired
+    ObjectMapper objectMapper;
 
-    final KafkaTemplate<String, Rating> kafkaTemplate;
+    @Autowired
+    KafkaTemplate<String, Rating> kafkaTemplate;
 
-    final RatingsRepository ratingsRepository;
+    @Autowired
+    RatingsRepository ratingsRepository;
 
-    final TalksRepository talksRepository;
+    @Autowired
+    TalksRepository talksRepository;
 
     @PostMapping
     public Mono<ResponseEntity<Object>> recordRating(@RequestBody Rating rating) throws Exception {

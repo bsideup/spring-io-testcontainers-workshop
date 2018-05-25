@@ -1,6 +1,6 @@
 package com.example.demo.repository;
 
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
@@ -9,10 +9,10 @@ import reactor.core.scheduler.Schedulers;
 import java.util.List;
 
 @Repository
-@RequiredArgsConstructor
 public class TalksRepository {
 
-    final JdbcTemplate jdbcTemplate;
+    @Autowired
+    JdbcTemplate jdbcTemplate;
 
     public Mono<Boolean> exists(String talkId) {
         return Mono

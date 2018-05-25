@@ -1,6 +1,6 @@
 package com.example.demo.repository;
 
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ReactiveRedisOperations;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
@@ -8,10 +8,10 @@ import reactor.core.publisher.Mono;
 import java.util.Map;
 
 @Repository
-@RequiredArgsConstructor
 public class RatingsRepository {
 
-    final ReactiveRedisOperations<String, String> redisOperations;
+    @Autowired
+    ReactiveRedisOperations<String, String> redisOperations;
 
     public Mono<Map<Integer, Integer>> findAll(String talkId) {
         return redisOperations.opsForHash()
